@@ -55,30 +55,6 @@ table td,table th{
     font-family:"Arial";
     font-style:bold
 }
-.c16{
-    padding-top:12pt;
-    padding-bottom:12pt;
-    line-height:1.15;
-    orphans:2;
-    widows:2;
-    text-align:center
-}
-.c4{
-    padding-top:12pt;
-    padding-bottom:12pt;
-    line-height:1.15;
-    orphans:2;
-    widows:2;
-    text-align:justify
-}
-.c19{
-    font-weight:400;
-    text-decoration:none;
-    vertical-align:baseline;
-    font-size:19pt;
-    font-family:"Arial";
-    font-style:normal
-}
 .c21{
     padding-top:0pt;
     padding-bottom:12pt;
@@ -95,13 +71,6 @@ table td,table th{
     widows:2;
     text-align:center;
 }
-.c17{
-    text-decoration:none;
-    vertical-align:baseline;
-    font-size:15pt;
-    font-family:"Arial";
-    font-style:normal
-}
 .c18{
     text-decoration:none;
     vertical-align:baseline;
@@ -114,11 +83,6 @@ table td,table th{
     -webkit-text-decoration-skip:none;
     color:#1155cc;
     text-decoration:underline
-}
-.c9{
-    background-color:#121212;
-    max-width:468pt;
-    padding:72pt 72pt 72pt 72pt
 }
 .c5{
     color:#d3cfca;
@@ -144,9 +108,6 @@ table td,table th{
 .c7{
     color:#d3cfca;
     font-weight:bolder;
-}
-.c20{
-    font-size:20pt
 }
 .title{
     padding-top:0pt;
@@ -266,11 +227,8 @@ h6{
     border-radius: 12px;
     padding: 10px;
     background-color: #121212;
-    
 }
 
-
-/* General body and text styling */
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -285,18 +243,17 @@ body {
     background-position: center;
 }
 
-/* Form container styling */
+
 .div_form {
-    width: 300px; /* Set the form container to a smaller width */
+    width: 300px;
     height: auto;
     padding: 2px;
     background-color: #1b1a1a;
     border-radius: 12px;
     box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
-    transform: scale(0.7);
+    transform: scale(0.8);
 }
 
-/* Input form styling */
 .input_form {
     padding-top: 15px;
     width: auto;
@@ -306,11 +263,7 @@ body {
     align-items: center;
 }
 
-#arithmetic_mean{
 
-}
-
-/* Label styling */
 .label {
     width: auto;
     height: auto;
@@ -319,7 +272,7 @@ body {
     color: #d3cfca;
 }
 
-/* Input fields styling */
+
 .input {
     width: 80%;
     height: auto;
@@ -335,16 +288,16 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Hide the default spinner buttons in webkit browsers (Chrome, Safari) */
+
 .input::-webkit-inner-spin-button,
 .input::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Hides the default buttons */
-    margin: 0; /* Remove default margin */
+    -webkit-appearance: none; 
+    margin: 0; 
 }
 
-/* Hide the default spinner buttons in Firefox */
+
 .input {
-    -moz-appearance: textfield; /* Change appearance for Firefox */
+    -moz-appearance: textfield;
 }
 
 .input:focus {
@@ -352,7 +305,7 @@ body {
     box-shadow: 0 0 8px #db4cb0;
 }
 
-/* Button styling */
+
 .button_generate {
     width: 40%;
     padding: 10px;
@@ -373,7 +326,6 @@ body {
     transform: scale(0.98);
 }
 
-/* Chart container styling */
 .chart_container {
     width: 90%;
     margin-bottom: 20px;
@@ -391,7 +343,6 @@ canvas {
     display: block;
 }
 
-/* Error message styling */
 #error {
     color: #FF5C5C;
     margin-top: 1rem;
