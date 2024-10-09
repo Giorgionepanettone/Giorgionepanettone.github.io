@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="../style.css" />
+        <script defer src="homework1.js"></script>
+    </head>
+    <body class="body">
+        <div class = "text_div">
+            <p class="c6"><span class="c2">This is my first homework for the Statistics course at Sapienza university. </span></p>
+            <p class="c6"><span class="c2">I will start by elaborating on some core concepts of statistics and follow up with an interactive <a href="#div_form">simulation</a>.</span></p>
+            
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c8"><span class="c7 c14">Core concepts</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Statistical population</span></p>
+            <p class="c6"><span class="c2">A statistical population is the </span><span class="c5">set of elements</span><span class="c2">&nbsp;that is of interest when we are conducting a study or experiment. It is heavily dependent on the study subject. Interestingly, the population doesn&#39;t have to consist of real-world entities, it can also include hypothetical or theoretical elements.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Statistical units</span></p>
+            <p class="c6"><span class="c2">Statistical units are the </span><span class="c5">individual elements</span><span class="c2">&nbsp;that comprise a statistical population. They are the subjects or entities on which observations and measurements are made during a study.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Distribution</span></p>
+            <p class="c6"><span class="c2">A distribution is a </span><span class="c5">function that describes how data is shaped</span><span class="c2">, assigning a probability value to each possible outcome. The sum of all probabilities must be 1. Intuitively we&rsquo;re saying that a measurement (or observation) has to give as a result one of the possible values defined by the distribution.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Arithmetic mean</span></p>
+            <p class="c6"><span class="c2">The arithmetic mean of a set is defined as t</span><span class="c5">he sum of all values divided by the number of values</span><span class="c2">. (Obviously values have to be numeric to compute it). Let&rsquo;s define Dy(A) of a point A as the sum of all distances from A the values located to the left of A. Dx(A)&#8203; is defined analogously, but considers the values to the right of A. The arithmetic mean is the point B such that Dy(B) = Dx(B).</span></p>
+            <p class="c6"><span class="c2">It can also be thought of as the point that best represents a set of values. Note that B does not have to be part of the set.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Median</span></p>
+            <p class="c6"><span class="c2">Developing on a similar idea, let&rsquo;s define Nx(A) and Ny(A) of a point A as the number of values that reside to the right(Nx) or to the left(Ny) of A. The median is </span><span class="c5 c18">the point B such that Nx = Ny.</span></p>
+            <p class="c6"><span class="c2">Note that for a set with odd cardinality, the median can be any of the infinite points that reside in the interval between the two central points of the set. In this case, the median is the arithmetic mean of these two central points.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Mode</span></p>
+            <p class="c6"><span class="c2">The mode is simply </span><span class="c5">the value that appears most often in a set</span><span class="c2">. By nature, a mode is not guaranteed to be unique. (Take for example the set [0,0,4,4]). Infact, a set can be bimodal or more generally multimodal depending on the number of modes.</span></p>
+            <p class="c6"><span class="c2">Note that the mode is well defined even in non numerical sets.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+        </div>
+        <div class ="text_div">
+            <p class="c8"><span class="c7 c14">Float representation and its computational problems</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c21"><span class="c2">To represent a decimal number in a binary system, we use a standard format called </span><span class="c5">IEEE 754</span><span class="c2">. This format consists of a sign </span><span class="c5">S</span><span class="c2">, a mantissa (or significand) </span><span class="c5">M</span><span class="c2">, and an exponent </span><span class="c5">E</span><span class="c2">. The decimal number is represented by the formula: <br><span style="font-size: 24px; font-weight: bold;">
+            <br>
+                <code>(-1)<sup>S</sup> &middot; M &middot; 2<sup>E</sup></code>
+            </span>
+            <p class="c6"><span class="c2">Since any interval between two distinct decimal numbers is infinite, it goes by itself that we cannot represent every decimal number with absolute precision. As a result, for any given number </span><span class="c5">A</span><span class="c2">, there can be a small difference between </span><span class="c5">A</span><span class="c2">&nbsp;and its floating-point representation. This fact can lead to significant consequences in numerical computations.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">For instance, if we multiply two floating-point numbers, the result may be slightly different from the expected value due to the accumulation of rounding errors from each float. Now imagine performing this multiplication thousands of times (say 10,000 multiplications). The cumulative error can grow, potentially leading to a result that is completely wrong and far from the expected outcome.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">This is why algorithms are specifically developed to minimize the propagation and accumulation of errors in floating-point operations, ensuring that the precision loss remains as small as possible.</span></p>
+            <p class="c6 c15"><span class="c2"></span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Catastrophic cancellation</span></p>
+            <p class="c6"><span class="c2">Suppose we have two values, </span><span class="c5">A&prime;</span><span class="c2">&nbsp;and </span><span class="c5">B&rsquo;</span><span class="c2">, which are good approximations of </span><span class="c5">A</span><span class="c2">&nbsp;and </span><span class="c5">B</span><span class="c2">, respectively. </span><span class="c5">Catastrophic cancellation</span><span class="c2">&nbsp;occurs when subtracting </span><span class="c5">A&prime;&minus;B&prime;</span><span class="c2">&nbsp;leads to a significant increase in error compared to the original difference </span><span class="c5">A&minus;B</span><span class="c2">. This happens because when </span><span class="c5">A</span><span class="c2">&nbsp;and </span><span class="c5">B</span><span class="c2">&nbsp;are close in value, small inaccuracies in their floating-point approximations can be astronomically magnified during subtraction, resulting in a </span><span class="c5">loss of precision</span><span class="c2">.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">The closer x and y are in value, the bigger the error introduced by catastrophic cancellation.</span></p>
+            <p class="c6 c15"><span class="c2"></span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c0">Numerical solutions</span></p>
+            
+            <p class="c6"><span class="c10 c11"><a class="c3" href="https://www.google.com/url?q=https://en.wikipedia.org/wiki/Donald_Knuth&amp;sa=D&amp;source=editors&amp;ust=1728387694423494&amp;usg=AOvVaw3QQOujA38zhMJyPfSX2fX5">Donald Knuth</a></span><span class="c2">, the godfather of computer science, tackled these computational problems in his book </span><span class="c12 c2">The art of computer science</span><span class="c2">. In particular, he developed a clever algorithm to compute the </span><span class="c5">arithmetic mean</span><span class="c2">&nbsp;of a set, avoiding common issues that the </span><span class="c2 c12">&ldquo;naive&rdquo;</span><span class="c2">&nbsp;computation carries like </span><span class="c5">integer overflow</span><span class="c2">&nbsp;and </span><span class="c5">error cumulation</span><span class="c2">.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">When calculating the </span><span class="c5">mean</span><span class="c2">&nbsp;of a large set of numbers using the traditional formula, there&rsquo;s a high risk of </span><span class="c5">losing precision</span><span class="c2">, especially when working with floating-point numbers, due to rounding errors that may accumulate as we add many values.</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">Instead of adding all values and dividing by the number of values at the end, we can </span><span class="c5">rearrange the formula</span><span class="c2">&nbsp;to calculate many </span><span class="c5">intermediate means</span><span class="c2">. This allows us to have a much more controlled error. The pseudo code for the algorithm is something like this:</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">def arithmetic_mean(set):</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count = 0</span></p>
+            
+            <p class="c6"><span class="c2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mean = 0</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for i in set:</span></p>
+            <p class="c6"><span class="c2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count = count + 1</span></p>
+            <p class="c6"><span class="c2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mean = mean + (i - mean)/count
+            <p class="c8"><span class="c7 c14">Simulation time</span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">There are </span><span class="c5">m</span><span class="c2">&nbsp;hackers, </span><span class="c5">n </span><span class="c2">systems and a probability </span><span class="c5">p</span><span class="c2">&nbsp;that each hacker hacks a system. I wrote an interactive script in JavaScript that takes these 3 parameters and simulates the path of each hacker through the systems, displaying it on a stepped graph. It then calculates how many hackers managed to hack 1 system, how many hacked 2 systems, etc. and displays this information on a bar graph. It concludes by calculating the arithmetic mean using the formula described above. </span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">You can find the JavaScript source code on my </span><span class="c10"><a class="c3" href="https://www.google.com/url?q=https://github.com/Giorgionepanettone/Giorgionepanettone.github.io&amp;sa=D&amp;source=editors&amp;ust=1728387694434261&amp;usg=AOvVaw21kKXTOhG6LZ11RAtajZv8">github</a></span><span class="c2">. </span></p>
+            <p class="c1"><span class="c2"></span></p>
+            <p class="c6"><span class="c2">The script is pretty straightforward: a </span><span class="c2 c13">generate</span><span class="c2">&nbsp;function retrieves the values of </span><span class="c5">m</span><span class="c2">, </span><span class="c5">n</span><span class="c2">, and </span><span class="c5">p</span><span class="c2">&nbsp;from the HTML form, checks them for errors, runs the simulation, and generates the corresponding graphs. This function is triggered both when the page loads and when the generate button is clicked.</span></p>
+            <p class="c6 c15"><span class="c2"></span></p>
+           
+        </div>
+        <div class="div_form" id ="div_form">
+            <form class="input_form">
+                <label class="label" for="hackers">Hackers:</label><br>
+                <input class="input" type="number" id="hackers" name="hackers" value="15"><br>
+    
+                <label class="label" for="systems">Systems:</label><br>
+                <input class="input" type="number" id="systems" name="systems" value="15"><br>
+    
+                <label class="label" for="probability">Success probability:</label><br>
+                <input class="input" type="number" id="probability" name="probability" value="0.7"><br>
+                
+                <button class="button_generate" id="button__generate" role="button">Generate</button>
+                <span id="error"></span>
+            </form>
+        </div>
+        
+        <div class="chart_container">
+            <canvas id="chart_hackersPath"></canvas>
+        </div>
+    
+        <div class="chart_container">
+            <label class="label" id="expected_mean">Success probability:</label><br>
+            <label class="label" id="arithmetic_mean">Success probability:</label><br>
+            <canvas id="chart_scoreBoard"></canvas>
+        </div>
+    </body>
+</html>
