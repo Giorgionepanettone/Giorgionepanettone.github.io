@@ -180,7 +180,7 @@ function generate(){
           y: {
             title: {
               display: true,        
-              text: 'Succesfull hacks',
+              text: 'Number of hackers',
               color: '#d3cfca',
               font: {
                   size: 14
@@ -196,7 +196,7 @@ function generate(){
           x: {
             title: {
               display: true,        
-              text: 'Number of hackers',
+              text: 'Succesfull hacks',
               color: '#d3cfca',
               font: {
                   size: 14
