@@ -7,6 +7,7 @@ const errorText = document.getElementById("error");
 const arithmetic_mean_label = document.getElementById("arithmetic_mean");
 const expected_mean_label = document.getElementById("expected_mean");
 const variance_label = document.getElementById("variance");
+const frequency_select = document.getElementById("select_frequency");
 
 errorText.style.color = "red"
 
@@ -129,6 +130,13 @@ function generate(){
     else scoreBoard[systems - Math.abs(totalSystemsHacked)]++;
   }
 
+  if (frequency_select.value == "Relative frequencies"){
+    for(let i = 0; i < scoreBoard.length; i++){
+      scoreBoard[i] /= hackers;
+      scoreBoardInternal[i] /= hackers;
+    }
+  }
+
   const decimation = {
     enabled: true,
     algorithm: 'min-max',
@@ -207,6 +215,15 @@ function generate(){
   arithmetic_mean_label.textContent = "Actual mean: " + String(arithmeticMean_variance_object.mean);
   expected_mean_label.textContent = "Expected mean: " + String(systems * p);
   variance_label.textContent = "variance: " + String(arithmeticMean_variance_object.variance);
+  let scoreBoardText = "";
+
+  if(frequency_select.value == "Relative frequencies"){
+    scoreBoardText = "Percentage of hackers";
+  }
+  else if(frequency_select.value == "Absolute frequencies"){
+    scoreBoardText = "Number of hackers";
+  }
+
 
   currentChart1 = new Chart(
     document.getElementById('chart_scoreBoard'),
@@ -217,7 +234,7 @@ function generate(){
           y: {
             title: {
               display: true,        
-              text: 'Number of hackers',
+              text: scoreBoardText,
               color: '#d3cfca',
               font: {
                   size: 14
@@ -270,7 +287,7 @@ function generate(){
           y: {
             title: {
               display: true,        
-              text: 'Number of hackers',
+              text: scoreBoardText,
               color: '#d3cfca',
               font: {
                   size: 14
