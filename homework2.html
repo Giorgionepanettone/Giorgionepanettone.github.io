@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="../styleHW2.css" />
+        <script defer src="homework2.js"></script>
+    </head>
+    <body>
+        <div class="div_form" id ="div_form">
+            <form class="input_form">
+                <label class="label" for="hackers">Hackers:</label><br>
+                <input class="input" type="number" id="hackers" name="hackers" value="50"><br>
+    
+                <label class="label" for="systems">Systems:</label><br>
+                <input class="input" type="number" id="systems" name="systems" value="50"><br>
+    
+                <label class="label" for="probability">Success probability:</label><br>
+                <input class="input" type="number" id="probability" name="probability" value="0.7"><br>
+
+                <label class="label" for="internal n">Internal step:</label><br>
+                <input class="input" type="number" id="internal_n" name="internal_n" value="1"><br>
+
+                <select class = "select">
+                    <option>Absolute frequencies</option>
+                    <option>Relative frequencies</option>
+                </select>
+                
+                
+                <button class="button_generate" id="button__generate" role="button">Generate</button>
+                <span id="error"></span>
+            </form>
+        </div>
+        <div class="chart_container">
+            <canvas id="chart_hackersPath"></canvas>
+        </div>
+    
+        <div class="chart_container">
+            <label class="label" id="expected_mean">Success probability:</label><br>
+            <label class="label" id="arithmetic_mean">Success probability:</label><br>
+            <label class="label" id="variance">Success probability:</label><br>
+            <canvas id="chart_scoreBoard"></canvas>
+        </div>
+
+        <div class="chart_container">
+            <label class="label" id="expected_meann">Success probability:</label><br>
+            <label class="label" id="arithmetic_meann">Success probability:</label><br>
+            <canvas id="chart_scoreBoard1"></canvas>
+        </div>
+    </body>
