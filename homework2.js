@@ -2,11 +2,23 @@ let currentChart0;
 let currentChart1;
 let currentChart2;
 
+let systems;
+let hackers;
+let n;
+let p;
+
 const generateButton = document.getElementById('button__generate');
+
 const errorText = document.getElementById("error");
+
 const arithmetic_mean_label = document.getElementById("arithmetic_mean");
 const expected_mean_label = document.getElementById("expected_mean");
 const variance_label = document.getElementById("variance");
+
+const arithmetic_mean_label1 = document.getElementById("arithmetic_mean1");
+const expected_mean_label1 = document.getElementById("expected_mean1");
+const variance_label1 = document.getElementById("variance1");
+
 const frequency_select = document.getElementById("select_frequency");
 
 errorText.style.color = "red"
@@ -30,18 +42,18 @@ function arithmetic_mean_and_variance(set){
     let element = set[i];
     if (element != 0){
       let j = 0;
-      while(j < element){
-        let delta = i - mean;
+      let value = -systems + i;
+      while(j++ < element){
         count++;
+
+        let delta = value - mean;
         mean += (delta)/count;
-        variance += (i - mean) * delta;
-        j++
+        variance += (value - mean) * delta;
       }
-      
     } 
     i++;
   }
-  variance /= count -1
+  variance /= count-1
   return {mean, variance};
 }
 
@@ -62,10 +74,10 @@ function poolColors(a) {
 
 function generate(){
 
-  let systems = parseInt(document.getElementById('systems').value)
-  let hackers = parseInt(document.getElementById('hackers').value)
-  let p = parseFloat(document.getElementById('probability').value)
-  let n = parseInt(document.getElementById("internal_n").value)
+  systems = parseInt(document.getElementById('systems').value)
+  hackers = parseInt(document.getElementById('hackers').value)
+  p = parseFloat(document.getElementById('probability').value)
+  n = parseInt(document.getElementById("internal_n").value)
 
   if(isNaN(systems) || isNaN(hackers) || isNaN(p) || isNaN(n)){
     errorText.textContent = "Invalid numbers";
@@ -79,6 +91,10 @@ function generate(){
 
   errorText.textContent = "";
 
+  if(n > systems){
+    errorText.textContent = "internal step is too big";
+  }
+
   if(currentChart0) currentChart0.destroy()
   if(currentChart1) currentChart1.destroy()
   if(currentChart2) currentChart2.destroy()
@@ -91,8 +107,10 @@ function generate(){
 
   for(let i = 0; i < systems; i++){
     systemsArray.push(i);
+
     scoreBoard.push(0);
     scoreBoard.push(0);
+
     scoreBoardInternal.push(0);
     scoreBoardInternal.push(0);
   }
@@ -111,7 +129,7 @@ function generate(){
       if(randomNumber <= p) totalSystemsHacked++;
       else totalSystemsHacked--;
 
-      if(j == n){
+      if(j == n-1){
         totalSystemsHackedInternal = totalSystemsHacked;
       }
     }
@@ -123,26 +141,15 @@ function generate(){
       pointStyle: false
     })
 
-    if (totalSystemsHackedInternal >= 0) scoreBoardInternal[totalSystemsHackedInternal + systems]++;
-    else scoreBoardInternal[systems - Math.abs(totalSystemsHackedInternal)]++;
-
-    if (totalSystemsHacked >= 0) scoreBoard[totalSystemsHacked + systems]++;
-    else scoreBoard[systems - Math.abs(totalSystemsHacked)]++;
+    scoreBoardInternal[totalSystemsHackedInternal + systems]++;
+    scoreBoard[totalSystemsHacked + systems]++;
   }
 
-  if (frequency_select.value == "Relative frequencies"){
-    for(let i = 0; i < scoreBoard.length; i++){
-      scoreBoard[i] /= hackers;
-      scoreBoardInternal[i] /= hackers;
-    }
-  }
 
   const decimation = {
     enabled: true,
     algorithm: 'min-max',
   };
-
-  console.log(scoreBoard);
 
   currentChart0 = new Chart(
     document.getElementById('chart_hackersPath'),
@@ -207,14 +214,18 @@ function generate(){
     hackerArray.push(i);
   }
 
-  let copyArray = systemsArray.slice(0, systems);
-  copyArray.push(systems);
-
   let arithmeticMean_variance_object = arithmetic_mean_and_variance(scoreBoard);
 
   arithmetic_mean_label.textContent = "Actual mean: " + String(arithmeticMean_variance_object.mean);
-  expected_mean_label.textContent = "Expected mean: " + String(systems * p);
+  expected_mean_label.textContent = "Expected mean: " + String(systems * (2*p-1));
   variance_label.textContent = "variance: " + String(arithmeticMean_variance_object.variance);
+
+  let arithmeticMean_variance_objectInternal = arithmetic_mean_and_variance(scoreBoardInternal);
+
+  arithmetic_mean_label1.textContent = "Actual mean: " + String(arithmeticMean_variance_objectInternal.mean);
+  expected_mean_label1.textContent = "Expected mean: " + String(n * (2*p-1));
+  variance_label1.textContent = "variance: " + String(arithmeticMean_variance_objectInternal.variance);
+
   let scoreBoardText = "";
 
   if(frequency_select.value == "Relative frequencies"){
@@ -224,6 +235,12 @@ function generate(){
     scoreBoardText = "Number of hackers";
   }
 
+  if (frequency_select.value == "Relative frequencies"){
+    for(let i = 0; i < scoreBoard.length; i++){
+      scoreBoard[i] /= hackers;
+      scoreBoardInternal[i] /= hackers;
+    }
+  }
 
   currentChart1 = new Chart(
     document.getElementById('chart_scoreBoard'),
