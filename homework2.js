@@ -119,7 +119,7 @@ function generate(){
 
       else if(frequency_select.value == "Absolute frequencies")   totalToPush = totalSystemsHacked;
 
-      if(j == n+1) savedScores.push(totalToPush); 
+      if(j == n-1) savedScores.push(totalToPush); 
     }
     array[i].push(totalToPush);
 

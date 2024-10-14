@@ -7,6 +7,19 @@
         <script defer src="homework2.js"></script>
     </head>
     <body>
+        <div class="text_div">
+            <h1 class="code-line" data-line-start="0" data-line-end="1"><a id="Info_0"></a>Info</h1>
+            <p class="has-line-data" data-line-start="1" data-line-end="3" id="This_is_my">This is my second homework for the Statistics course at Sapienza university.<br>
+            I made these changes to the charts from the previous homework:</p>
+            <ul>
+                <li class="has-line-data" data-line-start="3" data-line-end="4">You can now resize the charts. Just drag them from bottom left</li>
+                <li class="has-line-data" data-line-start="4" data-line-end="5">Now variance is calculated and displayed along with expected and actual mean</li>
+                <li class="has-line-data" data-line-start="5" data-line-end="6">Now the hackers get -1 on a failed attempt to hack a system, so they maintain a score instead of a count of systems hacked</li>
+                <li class="has-line-data" data-line-start="6" data-line-end="7">You can now choose between absolute and relative frequencies</li>
+                <li class="has-line-data" data-line-start="7" data-line-end="9">You can choose an internal step. The third chart will show the distribution at that step</li>
+            </ul>
+        </div>
+
         <div class="div_form" id ="div_form">
             <form class="input_form">
                 <label class="label" for="hackers">Hackers:</label><br>
@@ -50,5 +63,8 @@
             <canvas id="chart_scoreBoard1"></canvas>
         </div>
 
-        
+        <div class ="text_div" id ="Considerations">
+            <h1 class="code-line" data-line-start="9" data-line-end="10"><a id="Considerations_9"></a>Considerations</h1>
+            <p class="has-line-data" data-line-start="10" data-line-end="11">Interesting things happen with the new changes. With absolute frequencies the variance seems to grow linearly with time, ending in the neighborhood of the number of systems at the end when p is 0.5. Sperimentally, I think the expected variance is equal to the number of systems in this case. With the relative frequencies, the variance seems to stop growing linearly but “stabilizes” after a number of steps and changes slighty after that.</p>
+        </div>
     </body>
