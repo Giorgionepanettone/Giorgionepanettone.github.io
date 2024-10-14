@@ -10,16 +10,16 @@
         <div class="div_form" id ="div_form">
             <form class="input_form">
                 <label class="label" for="hackers">Hackers:</label><br>
-                <input class="input" type="number" id="hackers" name="hackers" value="50"><br>
+                <input class="input" type="number" id="hackers" name="hackers" value="100"><br>
     
                 <label class="label" for="systems">Systems:</label><br>
-                <input class="input" type="number" id="systems" name="systems" value="50"><br>
+                <input class="input" type="number" id="systems" name="systems" value="100"><br>
     
                 <label class="label" for="probability">Success probability:</label><br>
-                <input class="input" type="number" id="probability" name="probability" value="0.7"><br>
+                <input class="input" type="number" id="probability" name="probability" value="0.5"><br>
 
                 <label class="label" for="internal n">Internal step:</label><br>
-                <input class="input" type="number" id="internal_n" name="internal_n" value="1"><br>
+                <input class="input" type="number" id="internal_n" name="internal_n" value="50"><br>
 
                 <select class = "select" id ="select_frequency">
                     <option>Absolute frequencies</option>
@@ -31,6 +31,7 @@
                 <span id="error"></span>
             </form>
         </div>
+
         <div class="chart_container">
             <canvas id="chart_hackersPath"></canvas>
         </div>
@@ -48,4 +49,6 @@
             <label class="label" id="variance1">Success probability:</label><br>
             <canvas id="chart_scoreBoard1"></canvas>
         </div>
+
+        
     </body>

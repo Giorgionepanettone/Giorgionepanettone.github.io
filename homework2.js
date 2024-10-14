@@ -33,27 +33,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function arithmetic_mean_and_variance(set){
-  let count = 0;
   let mean = 0;
   let variance = 0;
   let i = 0;
 
   while(i < set.length){
-    let element = set[i];
-    if (element != 0){
-      let j = 0;
-      let value = -systems + i;
-      while(j++ < element){
-        count++;
+    const element = set[i];
 
-        let delta = value - mean;
-        mean += (delta)/count;
-        variance += (value - mean) * delta;
-      }
-    } 
-    i++;
+    const delta = element - mean;
+    mean += (delta)/++i;
+    variance += (element - mean) * delta;
   }
-  variance /= count-1
+  if(i >1) variance /= i-1;
+  else variance/= i;
   return {mean, variance};
 }
 
@@ -102,38 +94,34 @@ function generate(){
   let array = [];
   let dataset = [];
   let systemsArray = [];
-  let scoreBoard = [];
-  let scoreBoardInternal = [];
+  let scores = [];
+  let savedScores = [];
 
   for(let i = 0; i < systems; i++){
     systemsArray.push(i);
-
-    scoreBoard.push(0);
-    scoreBoard.push(0);
-
-    scoreBoardInternal.push(0);
-    scoreBoardInternal.push(0);
   }
-  scoreBoard.push(0);
-  scoreBoardInternal.push(0);
   systemsArray.push(systems-1);
 
   for(let i = 0; i < hackers; i++){
     array[i] = [];
     let totalSystemsHacked = 0;
-    let totalSystemsHackedInternal = 0;
+    let totalToPush = 0;
+
     for(let j = 0; j < systems; j++){
-      let randomNumber = Math.random();
-      array[i].push(totalSystemsHacked);
+      const randomNumber = Math.random();
 
-      if(randomNumber <= p) totalSystemsHacked++;
-      else totalSystemsHacked--;
+      array[i].push(totalToPush);  
 
-      if(j == n-1){
-        totalSystemsHackedInternal = totalSystemsHacked;
-      }
+      if(randomNumber <= p)   totalSystemsHacked++;   
+      else                    totalSystemsHacked--;
+
+      if(frequency_select.value == "Relative frequencies")        totalToPush = totalSystemsHacked/(j+1);
+
+      else if(frequency_select.value == "Absolute frequencies")   totalToPush = totalSystemsHacked;
+
+      if(j == n+1) savedScores.push(totalToPush); 
     }
-    array[i].push(totalSystemsHacked);
+    array[i].push(totalToPush);
 
     dataset.push({
       data: array[i],
@@ -141,15 +129,47 @@ function generate(){
       pointStyle: false
     })
 
-    scoreBoardInternal[totalSystemsHackedInternal + systems]++;
-    scoreBoard[totalSystemsHacked + systems]++;
+    scores.push(totalToPush);
   }
 
+  if(frequency_select.value == "Relative frequencies"){
+    scores.forEach((score, index) => {
+      scores[index] = Math.round(score * 1000) / 1000;  // round to nearest 0.01 and modify the original array
+  });
+  
+
+    savedScores.forEach((score, index) => {
+      savedScores[index] = Math.round(score * 1000) / 1000;  // round to nearest 0.01 and modify the original array
+  });
+}
+
+  let dict = {};
+  scores.forEach(element => {
+    if(element in dict)  dict[element] = dict[element]+1;
+    else                dict[element] = 1;
+  })
+
+  const keys = Object.keys(dict).map(Number);
+ 
+  const sortedKeys = keys.slice().sort((a, b) => a - b);
+  const sortedValues = sortedKeys.map(key => dict[key]);
+
+  let internalDict = {};
+  savedScores.forEach(element => {
+    if(element in internalDict)   internalDict[element] = internalDict[element]+1;
+    else                          internalDict[element] = 1;
+  })
+
+  const internalKeys = Object.keys(internalDict).map(Number);
+
+  const internalSortedKeys = internalKeys.slice().sort((a, b) => a - b);
+  const internalSortedValues = internalSortedKeys.map(key => internalDict[key]);
 
   const decimation = {
     enabled: true,
     algorithm: 'min-max',
   };
+
 
   currentChart0 = new Chart(
     document.getElementById('chart_hackersPath'),
@@ -209,18 +229,13 @@ function generate(){
   
   let colors = poolColors(systems);
 
-  let hackerArray = [];
-  for(let i = -systems; i < systems+1; i++){
-    hackerArray.push(i);
-  }
-
-  let arithmeticMean_variance_object = arithmetic_mean_and_variance(scoreBoard);
+  const arithmeticMean_variance_object = arithmetic_mean_and_variance(scores);
 
   arithmetic_mean_label.textContent = "Actual mean: " + String(arithmeticMean_variance_object.mean);
   expected_mean_label.textContent = "Expected mean: " + String(systems * (2*p-1));
   variance_label.textContent = "variance: " + String(arithmeticMean_variance_object.variance);
 
-  let arithmeticMean_variance_objectInternal = arithmetic_mean_and_variance(scoreBoardInternal);
+  const arithmeticMean_variance_objectInternal = arithmetic_mean_and_variance(savedScores);
 
   arithmetic_mean_label1.textContent = "Actual mean: " + String(arithmeticMean_variance_objectInternal.mean);
   expected_mean_label1.textContent = "Expected mean: " + String(n * (2*p-1));
@@ -233,13 +248,6 @@ function generate(){
   }
   else if(frequency_select.value == "Absolute frequencies"){
     scoreBoardText = "Number of hackers";
-  }
-
-  if (frequency_select.value == "Relative frequencies"){
-    for(let i = 0; i < scoreBoard.length; i++){
-      scoreBoard[i] /= hackers;
-      scoreBoardInternal[i] /= hackers;
-    }
   }
 
   currentChart1 = new Chart(
@@ -283,10 +291,10 @@ function generate(){
       }
       },
       data: {
-        labels: hackerArray,
+        labels: sortedKeys,
         datasets: [{
           label: "Score",
-          data: scoreBoard,
+          data: sortedValues,
           backgroundColor: colors,
           borderColor: colors,
           color: colors
@@ -336,10 +344,10 @@ function generate(){
       }
       },
       data: {
-        labels: hackerArray,
+        labels: internalSortedKeys,
         datasets: [{
           label: "Score",
-          data: scoreBoardInternal,
+          data: internalSortedValues,
           backgroundColor: colors,
           borderColor: colors,
           color: colors
@@ -348,5 +356,3 @@ function generate(){
     }
   )
 }
-
-
