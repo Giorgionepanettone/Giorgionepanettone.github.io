@@ -40,9 +40,9 @@ function arithmetic_mean_and_variance(set){
   while(i < set.length){
     const element = set[i];
 
-    const delta = element - mean;
-    mean += (delta)/++i;
-    variance += (element - mean) * delta;
+    const delta =   element - mean;
+    mean +=         delta/++i;
+    variance +=     (element - mean) * delta;
   }
   if(i >1) variance /= i-1;
   else variance/= i;
@@ -134,19 +134,19 @@ function generate(){
 
   if(frequency_select.value == "Relative frequencies"){
     scores.forEach((score, index) => {
-      scores[index] = Math.round(score * 1000) / 1000;  // round to nearest 0.01 and modify the original array
+      scores[index] = Math.round(score * 1000) / 1000;
   });
   
 
     savedScores.forEach((score, index) => {
-      savedScores[index] = Math.round(score * 1000) / 1000;  // round to nearest 0.01 and modify the original array
+      savedScores[index] = Math.round(score * 1000) / 1000;
   });
 }
 
   let dict = {};
   scores.forEach(element => {
-    if(element in dict)  dict[element] = dict[element]+1;
-    else                dict[element] = 1;
+    if(element in dict)   dict[element] = dict[element]+1;
+    else                  dict[element] = 1;
   })
 
   const keys = Object.keys(dict).map(Number);
@@ -244,7 +244,7 @@ function generate(){
   let scoreBoardText = "";
 
   if(frequency_select.value == "Relative frequencies"){
-    scoreBoardText = "Percentage of hackers";
+    scoreBoardText = "Number of hackers";
   }
   else if(frequency_select.value == "Absolute frequencies"){
     scoreBoardText = "Number of hackers";
