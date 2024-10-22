@@ -80,18 +80,18 @@ function generate(){
   let possibleScoresArray = [];
   let scores = [];
 
-  for(let i = 0; i < n*t+1; i++){
-    tArray.push(i/n);
+  for(let i = 0; i < n+1; i++){
+    tArray.push(i*t/n);
     scoreBoard.push(0);
   }
   
   let max = 0;
-  let min = n*t+1;
+  let min = n+1;
   for(let i = 0; i < hackers; i++){
     array[i] = [];
     let totalSystemsHacked = 0;
     
-    for(let j = 0; j < n*t; j++){
+    for(let j = 0; j < n; j++){
       const randomNumber = Math.random();
       array[i].push(totalSystemsHacked);
       if(randomNumber <= p) totalSystemsHacked++;
@@ -178,7 +178,7 @@ function generate(){
   let colors = poolColors(max-min);
 
   arithmetic_mean_label.textContent = "Actual mean: " + String(arithmetic_mean_and_variance(scores).mean);
-  expected_mean_label.textContent = "Expected mean: " + String(lambda * t);
+  expected_mean_label.textContent = "Expected mean: " + String(lambda);
 
   if(slice_checkbox.checked)    scoreBoard = scoreBoard.slice(min, max+1); 
   else                          scoreBoard = scoreBoard.slice(0, max+1);                     
