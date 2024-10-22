@@ -44,8 +44,8 @@ function arithmetic_mean_and_variance(set){
     mean +=         delta/++i;
     variance +=     (element - mean) * delta;
   }
-  if(i >1) variance /= i-1;
-  else variance/= i;
+  if(i >1)  variance /= i-1;
+  else      variance /= i;
   return {mean, variance};
 }
 
