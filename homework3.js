@@ -36,14 +36,14 @@ function arithmetic_mean_and_variance(set){
   }
 
 function dynamicColors() {
-  var r = Math.floor(Math.random() * 255);
-  var g = Math.floor(Math.random() * 255);
-  var b = Math.floor(Math.random() * 255);
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
   return "rgba(" + r + "," + g + "," + b + ", 1.0)";
 }
 
 function poolColors(a) {
-  var pool = [];
+  let pool = [];
   for(i = 0; i < a; i++) {
       pool.push(dynamicColors());
   }
@@ -109,7 +109,7 @@ function generate(){
   }
 
   if(slice_checkbox.checked)    for(let i = min; i < max+1; i++) possibleScoresArray.push(i);
-  else                          for(let i = 0; i < max+1; i++) possibleScoresArray.push(i);
+  else                          for(let i = 0; i < max+1; i++)   possibleScoresArray.push(i);
 
   const decimation = {
     enabled: true,
@@ -182,8 +182,7 @@ function generate(){
 
   if(slice_checkbox.checked)    scoreBoard = scoreBoard.slice(min, max+1); 
   else                          scoreBoard = scoreBoard.slice(0, max+1);                     
-
-                       
+               
   currentChart1 = new Chart(
     document.getElementById('chart_scoreBoard'),
     {
