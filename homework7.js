@@ -112,8 +112,6 @@ function generate_data(){
     for(let i = 1; i < intervals; i++){
         probability_slices.push(probability_slices[i-1] + variables_list[i]/100);
     }
-
-    console.log("weights = ", variables_list);
     
     steps = parseInt(document.getElementById("steps").value);
     const increment_factor = 1/steps;
@@ -165,7 +163,6 @@ function compute_means_and_variances(scores){
         averages.push(probability_weighted_mean(scores[i], variables_list_percentages));
         variances.push(arithmetic_mean_and_variance(scores[i]).variance);
     }
-    console.log("averages = ", averages);
     return {averages, variances};
 }
 
@@ -177,7 +174,6 @@ function generate(){
 
     const averages_and_variances = compute_means_and_variances(scores);
 
-    //console.log(averages_and_variances);
     roundScores(averages_and_variances.averages);
 
     const average_scores = sortKeysAndValues(averages_and_variances.averages);
@@ -189,7 +185,7 @@ function generate(){
 
 function set_mean_and_variance(scores, averages_and_variances){
     const mean_and_variance = arithmetic_mean_and_variance(averages_and_variances.averages);
-    console.log("variables_list = ", variables_list);
+
     document.getElementById("average_of_averages").textContent = "Average of averages: " + String(mean_and_variance.mean);
     document.getElementById("parent_average").textContent = "Parent average: " + String(probability_weighted_mean(variables_list_percentages, variables_list_percentages));
     document.getElementById("variance_of_averages").textContent = "Variance of averages: " + String(mean_and_variance.variance);
