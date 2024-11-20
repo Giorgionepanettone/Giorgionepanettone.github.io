@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="stylesheet" href="../styleHW3.css" />
+      <link rel="stylesheet" href="../styleHW2.css" />
+      <link rel="stylesheet" href="../styleHW7.css" />
+      <link rel="stylesheet" href="../stackedit.io/style.css" />
+      <script defer src="homework7.js"></script>
+   </head>
+
+   <body>
+
+    <div class="div_form" id ="div_form">
+        <form class="input_form" id ="input_form">
+
+            <label class="label" for="Intervals">Intervals</label><br>
+            <input class="input_with_inputSpinner" type="number" id="intervals" name="intervals" value="3"><br>
+
+            <label class="label" >Steps:</label><br>
+            <input class="input" type="number" id="steps" name="steps" value="150"><br>
+
+            <label class="label" >Samples:</label><br>
+            <input class="input" type="number" id="samples" name="samples" value="1000"><br>
+            
+            <button class="button_generate" id="button__generate" role="button">Generate</button>
+            <span id="error"></span>
+        </form>
+    </div>
+
+    <div class="div_form" >
+        <form class="input_form" id="variables_form">
+
+        </form>
+    </div>
+
+    <div class="chart_container">
+        <label class="label" id="average_of_averages"></label><br>
+        <label class="label" id="parent_average"></label><br>
+        <label class="label" id="variance_of_averages"></label><br>
+        <label class="label" id="parent_variance"></label><br>
+        <canvas id="chart_scoreBoard"></canvas>
+    </div>
+
+    <div class = "text_div">
+        <div class="stackedit__html"><h1 id="conclusions">Conclusions</h1>
+            <p>The average of averages looks to be the same, I think because the samples are all of the same size so the weights remain evenly distributed. The variance is weird and I couldnt find a relation between the variance of averages and the parent variance.</p>
+            </div>
+    </div>
+
+   </body>
+</html>
