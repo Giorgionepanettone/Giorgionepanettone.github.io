@@ -6,6 +6,7 @@
       <link rel="stylesheet" href="../styleHW3.css" />
       <link rel="stylesheet" href="../styleHW2.css" />
       <link rel="stylesheet" href="../styleHW7.css" />
+      <link rel="stylesheet" href="../styleHW6.css" />
       <link rel="stylesheet" href="../stackedit.io/style.css" />
       <script defer src="homework7.js"></script>
    </head>
@@ -46,6 +47,40 @@
     <div class = "text_div">
         <div class="stackedit__html"><h1 id="conclusions">Conclusions</h1>
             <p>The average of averages looks to be the same, I think because the samples are all of the same size so the weights remain evenly distributed. The variance is weird and I couldnt find a relation between the variance of averages and the parent variance.</p>
+            </div>
+    </div>
+
+    <div class="div_form" id ="div_form">
+        <form class="input_form" id ="input_form">
+
+            <label class="label">Y = g^U mod n</label><br>
+            
+            <label class="label">g</label><br>
+            <input class="input_with_inputSpinner" type="number" id="g" name="g" value="3"><br>
+
+            <label class="label" >U</label><br>
+            <input class="input" type="number" id="U" name="U" value="2000"><br>
+
+            <label class="label" >n</label><br>
+            <input class="input" type="number" id="n" name="n" value="21"><br>
+            
+            <button class="button_generate" id="optional_button__generate" role="button">Generate</button>
+            <span id="optional_error"></span>
+        </form>
+    </div>
+
+    <div class="chart_container">
+        <label class="label" id="shannon_entropy"></label><br>
+        <label class="label" id="max_shannon_entropy"></label><br>
+        <canvas id="chart_optional_first"></canvas>
+    </div>
+
+    <div class = "text_div">
+        <div class="stackedit__html"><h1 id="observations">Observations</h1>
+            <p>With some values of g and n the distribution is more uniform than other. When it is more uniform the value 0 is never hit.<br>
+            I analyzed case A where n = 19 and g = 2, 3, 10, 17, and case B where n = 15 and g = 2, 6, 9, 12.<br>
+            Case A seems to generate much more uniform distributions than case B, where the distribution hits only certain numbers and not the whole range, augmenting its predictability. If for example this system was used to generate pseudo random numbers in a range from 1 to n, with case B an attacker would have a much higher chance of guessing.<br>
+            Looking more into this, it seems it has to do with <a href="https://en.wikipedia.org/wiki/Multiplicative_group_of_integers_modulo_n">multiplicative group of integers modulo n</a>. In particular, when n is prime it is easy to find so called generators g such that the resulting distribution is uniform, we need to check if the <a href="https://en.wikipedia.org/wiki/Multiplicative_order">order</a> of g is equal to the <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">euler totient function</a> of n. When n is not prime, no simple formula for finding such generators is known.</p>
             </div>
     </div>
 

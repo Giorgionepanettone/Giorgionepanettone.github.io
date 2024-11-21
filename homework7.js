@@ -6,6 +6,10 @@ let steps;
 let chart;
 let samples;
 let variables_list_percentages;
+let optional_chart;
+let g;
+let U;
+let n;
 
 intervals_input.addEventListener('change', (event) =>{
     intervals_have_changed();
@@ -14,10 +18,18 @@ intervals_input.addEventListener('change', (event) =>{
 const errorText = document.getElementById("error");
 errorText.style.color = "red";
 
+const optional_errorText = document.getElementById("optional_error");
+optional_errorText.style.color = "red";
+
 document.getElementById('button__generate').addEventListener("click", (event) => {
     event.preventDefault();
     generate();
   });
+
+document.getElementById('optional_button__generate').addEventListener("click", (event) => {
+    event.preventDefault();
+    optional_generate();
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
     let a,b,c;
@@ -30,6 +42,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         c.value = 25;
     }
     generate();
+    optional_generate();
 });
 
 for(let i = 0; i < intervals; i++){
@@ -92,10 +105,6 @@ function check_input_correctness(){
     let total_probability = 0;
     for(let i = 0; i < variables_list.length; i++){
         total_probability += variables_list[i];
-        if(total_probability > 100){
-            error.textContent = "Probability sum greater than 100%";
-            return -1;
-        }
     }
     if(total_probability != 100){
         error.textContent = "Probability sum is " + String(total_probability) + "%, different from 100%.";
@@ -130,6 +139,16 @@ function generate_data(){
         }
     }
     return scores;
+}
+
+function shannon_entropy(dataset, total_samples){
+    let entropy = 0;
+    for(let i = 0; i < dataset.length; i++){
+        const probability = dataset[i]/total_samples;
+        if(probability == 0) continue;
+        entropy += probability * Math.log2(probability);
+    }
+    return -entropy;
 }
 
 function binary_search(array, target){
@@ -181,6 +200,73 @@ function generate(){
     display_graph(average_scores.sortedKeys, average_scores.sortedValues);
 
     set_mean_and_variance(scores, averages_and_variances);
+}
+
+function optional_generate(){
+    do_optional_homework();
+}
+
+function do_optional_homework(){
+    optional_input_retrieval();
+
+    let optional_scores = optional_generate_data();
+
+    optional_display_graph(optional_scores);
+
+    optional_set_entropy(shannon_entropy(optional_scores, U));
+}
+
+function optional_set_entropy(entropy){
+    document.getElementById("shannon_entropy").textContent = "Shannon bit entropy= " +  String(entropy);
+    document.getElementById("max_shannon_entropy").textContent = "Max possible shannon entropy= " +  String(shannon_entropy(Array(n).fill(U/n), U));   
+}
+
+function optional_display_graph(optional_scores){
+    let x_axis_values = [];
+    for(let i = 0; i < n; i++){
+        x_axis_values.push(i);
+    }
+
+    if(optional_chart) optional_chart.destroy();
+
+    optional_chart = createChart_scoreboard("chart_optional_first", x_axis_values, optional_scores, poolColors(x_axis_values.length));
+}
+
+function optional_input_retrieval(){
+    g = parseInt(document.getElementById("g").value);
+    U = parseInt(document.getElementById("U").value);
+    n = parseInt(document.getElementById("n").value);
+
+    if(isNaN(g) || isNaN(U) || isNaN(n)){
+        optional_errorText.textContent = "invalid numbers";
+    }
+    
+    if(g < 0 || U < 0 || n < 0){
+        optional_errorText.textContent = "numbers cannot be negative";
+    }
+}
+
+function optional_generate_data(){
+    let optional_scores = Array(n).fill(0);
+
+    for(let i = 1; i <= U; i++){
+        optional_scores[modularExponentiation(g, i, n)]++;
+    }
+    return optional_scores;
+}
+
+function modularExponentiation(base, exponent, mod) {
+    let result = 1;
+    base = base % mod;
+    
+    while (exponent > 0) {
+        if (exponent % 2 === 1) {
+            result = (result * base) % mod;
+        }
+        base = (base * base) % mod;
+        exponent = Math.floor(exponent / 2);
+    }
+    return result;
 }
 
 function set_mean_and_variance(scores, averages_and_variances){
