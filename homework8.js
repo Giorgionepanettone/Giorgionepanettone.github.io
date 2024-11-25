@@ -299,7 +299,7 @@ function decrypt_caesar(cypherText){
             shift_quantity = (26 - i)%26;
         }
     }
-    document.getElementById("shift_quantity_recovered").textContent = "Recovered shift quantity = " + String(shift_quantity);
+    document.getElementById("shift_quantity_recovered").textContent = "Recovered shift quantity = " + String(26 - shift_quantity);
     console.log("stat_distances = ", stat_distances);
     console.log("shift_quantity = ", shift_quantity);
 
