@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="stylesheet" href="../styleHW3.css" />
+      <link rel="stylesheet" href="../styleHW2.css" />
+      <link rel="stylesheet" href="../styleHW8.css" />
+      <link rel="stylesheet" href="../stackedit.io/style.css" />
+      <script defer src="homework8.js"></script>
+   </head>
+
+   <body>
+
+    <div class="div_form" id ="div_form">
+
+        <form class="input_form" id ="input_form">
+
+            <select class = "select" id ="options">
+                <option>Caesar</option>
+                <option>Rsa</option>
+            </select>
+
+            <label class="label" for="Intervals">Enter your text here: </label><br>
+            <input class ="input" type="text" id="plainText">
+            
+            <button class="button_generate" id="button__generate" role="button">Generate</button>
+            <span id="error"></span>
+        </form>
+    </div>
+
+    <div class="text_div" >
+        <label class="label">Plain text</label><br>
+        <div class="stackedit__html" id ="plainText_div">
+
+        </div>
+    </div>
+
+    <div class="text_div" >
+        <label class="label" id="shift_quantity"></label><br>
+        <label class="label">Crypted text</label><br>
+       
+        <div class="stackedit__html" id ="cypherText_div">
+            
+        </div>
+    </div>
+
+    <div class="text_div" id ="third_text">
+        <label class="label" id="shift_quantity_recovered"></label><br>
+        <label class="label">Decrypted text</label><br>
+        
+        <div class="stackedit__html" id ="decryptedText_div">
+
+        </div>
+    </div>
+
+    <div class="chart_container">
+        <label class="label">Italian language frequency: </label><br>
+        <canvas id="chart_italian"></canvas>
+    </div>
+
+    <div class="chart_container">
+        <label class="label" id ="shannon"></label><br>
+        <label class="label">Provided text frequency: </label><br>
+        <canvas id="chart_text"></canvas>
+    </div>
+
+    <div class = "text_div" id = "end_text">
+        <div class="stackedit__html"><h1 id="summary">Summary</h1>
+            <p>In both cyphers I thought about doing frequency analysis on the letters of the cyphertext, since a letter always gets crypted into another fixed letter. My main idea was to calculate the statistical distance between the distribution of the cyphertext and the one of the language of the text (in this case italian). Then the objective becomes to find the permutation of the cyphertext distribution that minimizes this statistical distance.<br>
+            In the caesar cypher I couldn’t find any other method then brute forcing (i.e. shifting the distribution by one letter everytime and calculating the statistical distance). Since there are only 26 letters, it is a very feasible approach, and it gives outstanding results even for very short phrases.<br>
+            In Rsa things get more complicated because we have no guarantee over the order of the letters. The best way I could find to minimize the statistical distance was in this <a href="https://stackoverflow.com/questions/54041397/given-two-arrays-find-the-permutations-that-give-closest-distance-between-two-a">answer</a> found online. This solution works better with medium to long sized texts, but it almost never quite gives the correct answer by itself, requiring the help of a human (or an a.i.) to decypher all the letters correctly.<br>
+            Statistical analysis is crucial in testing and evaluating cryptographic algorithms, helping distinguish between the bad ones (like caesar cypher) and the good ones.</p>
+        </div>
+    </div>
+
+   </body>
+</html>
