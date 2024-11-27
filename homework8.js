@@ -534,7 +534,6 @@ function clean_previous(){
 
 function generate(){
     const text = retrieve_text();
-    console.log("plaintext = ", text);
 
     const random_shift_value = Math.floor(Math.random() * 25);
     console.log("random shift value = ", random_shift_value);
@@ -553,9 +552,6 @@ function generate(){
         cypherText = apply_rsa_cipher(text);
         decrypted_text = decrypt_rsa(cypherText, text);
     }
-    console.log("cyphertext = ", cypherText);
-
-    console.log("decryptedText = ", decrypted_text);
 
     apply_changes_to_html(text, cypherText, decrypted_text);
 }
