@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="stylesheet" href="../styleHW3.css" />
+      <link rel="stylesheet" href="../styleHW2.css" />
+      <link rel="stylesheet" href="../styleHW6.css" />
+      <link rel="stylesheet" href="../styleHW10.css" />
+      <link rel="stylesheet" href="../stackedit.io/style.css" />
+      <script defer src="homework10.js"></script>
+   </head>
+
+   <body>
+
+    <div class = "text_div">
+        <div class="stackedit__html">
+            <h1 id="sampling-mean-and-variance">Sampling mean and variance</h1>
+<p>We all know what happens when we sample a population and calculate variables like mean, variance, and all other kinds of statistic indicators we can think about.<br>
+But what if we calculate an indicator on these samples and study the indicators of this new set? There are interesting insights that come up.<br>
+The mean of the means is the same as calculating the mean of the parent distribution. The same goes for the mean of the variances.<br>
+The variance of the means is smaller than the parent variance. This is because the mean of a sample converges as opposed to the single values, thanks to the central limit theorem.</p>
+        </div>
+    </div>
+
+    <div class = "text_div">
+        <div class="stackedit__html">
+            <h1 id="lebesgue-integral">Lebesgue integral</h1>
+<p>The most famous and used integral is the <a href="https://en.wikipedia.org/wiki/Riemann_integral">Riemann integral</a>. The main idea behind it is to slice the area that we wish to compute into many infinite vertical slices of infinitesimal values, and sum them all up. It just has one flaw. It only works with Riemann integrable functions (Mainly continuous functions). We can’t have functions with irregularities, or discrete functions.<br>
+This is where Lebesgue comes to rescues us. Instead of cutting the area into vertical slices, he had the idea of using horizontal slices, making non continuous functions eligible for integration. The <a href="https://en.wikipedia.org/wiki/Lebesgue_integral">Lebesgue integral</a> is born.<br>
+It has a lot of applications in many fields, including Probability theory.<br>
+For example, it allows for density functions with irregularities, or to treat with a single formula both discrete and continuous casistics.</p>
+
+        </div>
+    </div>
+
+    <div class="div_form" id ="div_form">
+        <form class="input_form" id ="input_form">
+
+            <label class="label" >Granularity (number of intervals):</label><br>
+            <input class="input" type="number" id="granularity" name="granularity" value="600"><br>
+
+            <label class="label" >Lower limit of integration:</label><br>
+            <input class="input" type="number" id="a" name="a" value="1"><br>
+
+            <label class="label" >Upper limit of integration:</label><br>
+            <input class="input" type="number" id="b" name="b" value="13"><br>
+            
+            <button class="button_generate" id="button__generate" role="button">Generate</button>
+            <span id="error"></span>
+        </form>
+    </div>
+
+    <div class="chart_container">
+        <canvas id="chart_scoreBoard"></canvas>
+    </div>
+
+    <div class = "text_div" id = "end_text">
+        <div class="stackedit__html">
+            <h1 id="practice">Practice</h1>
+<p>I programmed a numerical approximation of the Riemann and Lebesgue integral of the function <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup></mrow><annotation encoding="application/x-tex">e^x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.664392em; vertical-align: 0em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.664392em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span>.<br>
+The granularity indicates the number of “rectangles” that the function sums to create the approximation. Notice how the higher the granularity, the closer the two integrals become and the closer both get to the actual integral value.</p>
+
+        </div>
+    </div>
+
+   </body>
+</html>
